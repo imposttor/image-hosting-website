@@ -1,2 +1,13 @@
+<div className="header" style="width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0px;
+    text-align: right;">
+    <div className="header1" style="display: inline-block;margin: 0 10px;">
+        <%= link_to 'My images', posts_path%>
+    </div>
+    <div className="header2" style="display: inline-block;margin: 0 10px;">
+        <%= link_to 'Sign out', destroy_user_session_path, :method => :delete %>
+    </div>
+</div>
 <%= react_component("home/Home") %>
-<%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>

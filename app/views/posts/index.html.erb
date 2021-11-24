@@ -1,6 +1,36 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Posts</h1>
+<div className="header" style="width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0px;
+    text-align: right;">
+    <div className="header1" style="display: inline-block;margin: 0 10px;">
+        <%= link_to 'Feed', feed_posts_path %>
+    </div>
+    <div className="header2" style="display: inline-block;margin: 0 10px;">
+        <%= link_to 'My images', posts_path%>
+    </div>
+    <div className="header3" style="display: inline-block;margin: 0 10px;">
+        <%= link_to 'Sign out', destroy_user_session_path, :method => :delete %>
+    </div>
+</div>
+
+<div className="feed_header" style="margin: 20px;
+display: flex;
+align-items: center;
+align-content: center;
+font-size: 32pt;
+font-family: cursive;">
+    My posts
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
 
 <table>
   <thead>

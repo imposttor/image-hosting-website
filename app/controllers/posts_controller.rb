@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_post, only: %i[ show edit update destroy ]
 
   # GET /posts or /posts.json
@@ -8,6 +9,11 @@ class PostsController < ApplicationController
 
   # GET /posts/1 or /posts/1.json
   def show
+  end
+
+  def hashtags
+      tag = Tag.find_by(name: params[:name])
+      @posts = tag.posts.where(user_id: current_user.id) | tag.posts.where(privacy: false)
   end
 
   def feed
@@ -70,7 +76,7 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-        params.require(:post).permit(:image,:privacy)
+        params.require(:post).permit(:image,:privacy,:hashtags)
 
     end
 end

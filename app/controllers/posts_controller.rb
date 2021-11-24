@@ -10,8 +10,8 @@ class PostsController < ApplicationController
   def show
   end
 
-  def show_in_feed
-      @posts = Post.where(user_id: current_user.id) + Post.where(privacy: false)
+  def feed
+      @posts = Post.where(user_id: current_user.id) | Post.where(privacy: false)
   end
 
   # GET /posts/new

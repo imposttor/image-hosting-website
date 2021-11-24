@@ -1,0 +1,40 @@
+<div className="header" style="width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0px;
+    text-align: right;">
+    <div className="header2" style="display: inline-block;margin: 0 10px;">
+        <%= link_to 'My images', posts_path%>
+    </div>
+    <div className="header3" style="display: inline-block;margin: 0 10px;">
+        <%= link_to 'Sign out', destroy_user_session_path, :method => :delete %>
+    </div>
+</div>
+<div className="feed_header" style="margin: 20px;
+display: flex;
+align-items: center;
+align-content: center;
+font-size: 32pt;
+font-family: cursive;">
+    NEWS FEED
+</div>
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+          <div className="post_in_feed">
+              Автор: <%= post.user.email%>
+          </div>
+          <div className="post_in_feed">
+              <%= image_tag(post.image, width: 600) %>
+          </div>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -10,6 +10,10 @@ class PostsController < ApplicationController
   def show
   end
 
+  def show_in_feed
+      @posts = Post.where(user_id: current_user.id) + Post.where(privacy: false)
+  end
+
   # GET /posts/new
   def new
     @post = Post.new
@@ -66,7 +70,7 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-        params.require(:post).permit(:image)
+        params.require(:post).permit(:image,:privacy)
 
     end
 end

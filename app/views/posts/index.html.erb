@@ -8,9 +8,6 @@
     <div className="header1" style="display: inline-block;margin: 0 10px;">
         <%= link_to 'Feed', feed_posts_path %>
     </div>
-    <div className="header2" style="display: inline-block;margin: 0 10px;">
-        <%= link_to 'My images', posts_path%>
-    </div>
     <div className="header3" style="display: inline-block;margin: 0 10px;">
         <%= link_to 'Sign out', destroy_user_session_path, :method => :delete %>
     </div>
@@ -22,7 +19,7 @@ align-items: center;
 align-content: center;
 font-size: 32pt;
 font-family: cursive;">
-    My posts
+    Posts by <%= current_user.email%>
 </div>
 
 <table>
@@ -53,4 +50,3 @@ font-family: cursive;">
 <br>
 
 <%= link_to 'New Post', new_post_path %>
-<%= link_to 'Sign out', destroy_user_session_path, :method => :delete %>

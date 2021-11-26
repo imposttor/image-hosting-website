@@ -21,3 +21,25 @@
      font-size: 32pt;
      font-family: cursive;
  }
+ .ShareBlock{
+     margin: 20px;
+     padding: 0px;
+     box-sizing: border-box;
+ }
+ .ShareBlock div{
+     display: inline-block;
+     margin: 0 10px;
+ }
+ .header{
+     width: 100%;
+     box-sizing: border-box;
+     margin: 0;
+     padding: 0px;
+     text-align: right;
+ }
+ .header div{
+     display: inline-block;margin: 0 10px;
+ }
+.images{
+    width: 550px;
+}

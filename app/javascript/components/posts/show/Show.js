@@ -15,11 +15,24 @@ class Show extends React.Component {
         <div className="imagesBlock">
             <img className = "images" src={this.props.imageLink}/>
         </div>
+        <div className="hashtags">
+        <Hashtags_to_links str={this.props.hashtags}/>
+        </div>
       </React.Fragment>
     );
   }
 }
+function Hashtags_to_links(props){
+    let regular_hashtag = /#[0-9A-Za-zА-Яа-яё]+/g;
+    let host = "/posts/hashtag/";
+    let resSplit = props.str.split('#').slice(1)
+    return resSplit.map(item => {
+        return (<a href={host + item}>#{item}</a>)
+    })
+}
+
 Show.propTypes = {
+    hashtags: PropTypes.string,
     imageLink: PropTypes.string,
     feedLink: PropTypes.string,
     signOutLink: PropTypes.string,

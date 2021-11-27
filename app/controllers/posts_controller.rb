@@ -18,6 +18,13 @@ class PostsController < ApplicationController
 
   def feed
       @posts = Post.where(user_id: current_user.id) | Post.where(privacy: false)
+      @result = []
+      @posts.each do |post|
+          temp_post = post.attributes
+          temp_post['image'] = post.image
+          temp_post['user_email'] = post.user.email
+          @result.push(temp_post)
+      end
   end
 
   # GET /posts/new

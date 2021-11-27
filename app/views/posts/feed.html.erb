@@ -26,16 +26,16 @@ font-family: cursive;">
   </thead>
 
   <tbody>
-    <% @posts.each do |post| %>
+    <% @result.each do |post| %>
       <tr>
           <div className="post_in_feed">
-              Author: <%= post.user.email%>
+              Author: <%= post['user_email']%>
           </div>
           <div className="post_in_feed">
-              Hashtags: <%= render_with_hashtags(post.hashtags)%>
+              Hashtags: <%= render_with_hashtags(post['hashtags'])%>
           </div>
           <div className="post_in_feed">
-              <%= image_tag(post.image, width: 600) %>
+              <%= image_tag(post['image'], width: 600) %>
           </div>
       </tr>
     <% end %>

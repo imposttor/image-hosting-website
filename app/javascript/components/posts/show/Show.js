@@ -1,15 +1,16 @@
 import React from "react"
 import PropTypes from "prop-types"
+import Share from "../../share/Share"
 class Show extends React.Component {
   render () {
     return (
         <React.Fragment>
-        <div className="header">
-            <div className="header1">
+        <div className="links-header">
+            <div>
                 <a href={this.props.feedLink}>Feed</a>
             </div>
-            <div className="header2">
-                <a data-method="DELETE" href={this.props.signOutLink}>Back</a>
+            <div>
+                <a data-method="DELETE" href={this.props.signOutLink}>Sign out</a>
             </div>
         </div>
         <div className="imagesBlock">
@@ -18,12 +19,17 @@ class Show extends React.Component {
         <div className="hashtags">
         <Hashtags_to_links str={this.props.hashtags}/>
         </div>
+        <div className="backLink">
+            <a href={this.props.backLink}>Back</a>
+        </div>
+        <div>
+            <Share/>
+        </div>
       </React.Fragment>
     );
   }
 }
 function Hashtags_to_links(props){
-    let regular_hashtag = /#[0-9A-Za-zА-Яа-яё]+/g;
     let host = "/posts/hashtag/";
     let resSplit = props.str.split('#').slice(1)
     return resSplit.map(item => {

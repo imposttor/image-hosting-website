@@ -14,6 +14,13 @@ class PostsController < ApplicationController
   def hashtags
       tag = Tag.find_by(name: params[:name])
       @posts = tag.posts.where(user_id: current_user.id) | tag.posts.where(privacy: false)
+      @result = []
+      @posts.each do |post|
+          temp_post = post.attributes
+          temp_post['image'] = url_for(post.image)
+          temp_post['user_email'] = post.user.email
+          @result.push(temp_post)
+      end
   end
 
   def feed
@@ -21,7 +28,7 @@ class PostsController < ApplicationController
       @result = []
       @posts.each do |post|
           temp_post = post.attributes
-          temp_post['image'] = post.image
+          temp_post['image'] = url_for(post.image)
           temp_post['user_email'] = post.user.email
           @result.push(temp_post)
       end

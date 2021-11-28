@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
-class Feed extends React.Component {
+class Hashtags extends React.Component {
   render () {
     return (
       <React.Fragment>
@@ -13,7 +13,7 @@ class Feed extends React.Component {
           </div>
       </div>
       <div className="feed-header">
-        NEWS FEED
+        SORTED NEWS BY HASHTAG
       </div>
       <div className="feed-posts">
         <Show_posts posts={this.props.postsArray}/>
@@ -22,7 +22,6 @@ class Feed extends React.Component {
     );
   }
 }
-
 function Show_posts(props){
     return props.posts.map(item => {
         return (<div>
@@ -46,9 +45,10 @@ function Hashtags_to_links(props){
         return (<a href={host + item}>#{item}</a>)
     })
 }
-Feed.propTypes = {
+Hashtags.propTypes = {
     postsArray: PropTypes.array,
     postsLink: PropTypes.string,
     signOutLink: PropTypes.string,
 };
-export default Feed
+
+export default Hashtags

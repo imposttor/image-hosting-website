@@ -1,7 +1,7 @@
-<p id="notice"><%= notice %></p>
 <%= react_component("posts/show/Show",
  signOutLink: "../users/sign_out",
  feedLink: "/posts/feed",
  backLink:"/posts",
- imageLink: url_for(@post.image),
- hashtags: @post.hashtags) %>
+ hashtags: @post.hashtags,
+ imageLink: url_for(@post.image)
+ ) %>

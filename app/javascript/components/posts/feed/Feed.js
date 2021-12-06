@@ -4,19 +4,24 @@ class Feed extends React.Component {
   render () {
     return (
       <React.Fragment>
-      <div className="links-header">
+      <div className="mainFeed">
+        <div className="linksHeader">
           <div>
-              <a href={this.props.postsLink}>My images</a>
+              <a href="/posts/profile">My profile</a>
           </div>
-          <div>
-              <a data-method="DELETE" href={this.props.signOutLink}>Sign out</a>
-          </div>
-      </div>
-      <div className="feed-header">
-        NEWS FEED
-      </div>
-      <div className="feed-posts">
-        <Show_posts posts={this.props.postsArray}/>
+            <div>
+                <a href={this.props.postsLink}>My images</a>
+            </div>
+            <div>
+                <a data-method="DELETE" href={this.props.signOutLink}>Sign out</a>
+            </div>
+        </div>
+        <div className="feedHeader">
+          NEWS FEED
+        </div>
+        <div className="feedPosts">
+          <Show_posts posts={this.props.postsArray}/>
+        </div>
       </div>
       </React.Fragment>
     );
@@ -24,26 +29,27 @@ class Feed extends React.Component {
 }
 
 function Show_posts(props){
-    return props.posts.map(item => {
-        return (<div>
-            <div className="post_in_feed">
+    return props.posts.map((item, index) => {
+        return (<div key={index} className="feedPost">
+            <div className="postInfo">
                 Author: {item.user_email}
             </div>
-                <div>
-                Hashtags: <Hashtags_to_links str = {item.hashtags}/>
+                <div className="postInfo">
+                Hashtags: <HashtagsToLinks str = {item.hashtags}/>
                 </div>
-        <div className="post_in_feed">
+        <div>
             <img className="images" src = {item.image}/>
         </div>
+        <a  className="postInfo" href={"/posts/" + item.id}>Show post</a>
     </div>);
     }
 );
 }
-function Hashtags_to_links(props){
+function HashtagsToLinks(props){
     let host = "/posts/hashtag/";
     let resSplit = props.str.split('#').slice(1)
-    return resSplit.map(item => {
-        return (<a href={host + item}>#{item}</a>)
+    return resSplit.map((item, index) => {
+        return (<a key={index} href={host + item}>#{item}</a>)
     })
 }
 Feed.propTypes = {

@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import axios from "axios";
+
 class Form extends React.Component {
     constructor(props){
         super(props);
@@ -16,19 +17,32 @@ sendFun(){
     var img = this.state.image;
     var prv = this.state.privacy;
     var tags = this.state.hashtags;
-    var link = this.props.post_id;
+    var link = "/posts/" + this.props.post_id;
     const token = document.querySelector('[name=csrf-token]').content;
     axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
     const formData = new FormData();
     formData.append('image', img);
     formData.append('privacy', prv);
     formData.append('hashtags', tags);
-    axios.patch(link, formData)
-        .then(response => {
-            callback(response.data);
-        }).catch(error => {
-         console.log("*****  "+error)
-    });
+    if(this.props.method == "patch"){
+      axios.patch(link, formData)
+          .then(response => {
+            window.location.replace(link)
+          })
+          .catch(error => {
+           console.log("*****  "+error)
+      });
+    }
+    if(this.props.method == "post"){
+      formData.append('user_id', this.props.user_id)
+      axios.post("/posts", formData)
+      .then(response => {
+          window.location.replace("/posts")
+      })
+      .catch(error => {
+       console.log("*****  "+error)
+     });
+    }
 }
 
 updateCheckValue(){
@@ -38,21 +52,27 @@ updateCheckValue(){
     return (
       <React.Fragment>
         <div className="mainForm">
+          <div className="formBlock">
+            <h1 className="pageName">
+                {this.props.header}
+            </h1>
             <div>
                 Privacy:
                 <input type="checkbox" name="privacy" onChange={this.updateCheckValue}/>
             </div>
             <div>
-                Hashtags:
-                <input type="text" name="hashtags" onChange={(e) => {this.setState({hashtags: e.target.value})}} />
+                <input type="text" name="hashtags" placeholder="#hashtags" onChange={(e) => {this.setState({hashtags: e.target.value})}} />
             </div>
             <div>
-                Image:
                 <input type="file" accept="image/png, image/jpeg" name="image" onChange={(e) => {this.setState({image: e.target.files[0]})}}/>
             </div>
             <div>
                 <button type="submit" name="submit_button" onClick={this.sendFun} >Send</button>
             </div>
+            <div>
+              <a href="/posts">Back</a>
+            </div>
+          </div>
         </div>
       </React.Fragment>
     );

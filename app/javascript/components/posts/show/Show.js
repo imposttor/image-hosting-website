@@ -5,35 +5,43 @@ class Show extends React.Component {
   render () {
     return (
         <React.Fragment>
-        <div className="links-header">
-            <div>
-                <a href={this.props.feedLink}>Feed</a>
-            </div>
-            <div>
-                <a data-method="DELETE" href={this.props.signOutLink}>Sign out</a>
-            </div>
-        </div>
-        <div className="imagesBlock">
-            <img className = "images" src={this.props.imageLink}/>
-        </div>
-        <div className="hashtags">
-        <Hashtags_to_links str={this.props.hashtags}/>
-        </div>
-        <div className="backLink">
-            <a href={this.props.backLink}>Back</a>
-        </div>
-        <div>
-            <Share/>
+        <div className = "mainShow">
+          <div className="linksHeader">
+              <div>
+                  <a href="/posts/profile">My profile</a>
+              </div>
+              <div>
+                  <a href={this.props.feedLink}>Feed</a>
+              </div>
+              <div>
+                  <a data-method="DELETE" href={this.props.signOutLink}>Sign out</a>
+              </div>
+          </div>
+          <div className="imagesBlock">
+              <img className = "images" src={this.props.imageLink}/>
+          </div>
+          <div className="hashtags">
+          <HashtagsToLinks str={this.props.hashtags}/>
+          </div>
+          <div>
+              Количество просмотров: {this.props.views}
+          </div>
+          <div className="backLink">
+              <a href={this.props.backLink}>Back</a>
+          </div>
+          <div>
+              <Share/>
+          </div>
         </div>
       </React.Fragment>
     );
   }
 }
-function Hashtags_to_links(props){
+function HashtagsToLinks(props){
     let host = "/posts/hashtag/";
     let resSplit = props.str.split('#').slice(1)
-    return resSplit.map(item => {
-        return (<a href={host + item}>#{item}</a>)
+    return resSplit.map((item, index) => {
+        return (<a key={index} href={host + item}>#{item}</a>)
     })
 }
 

@@ -10,6 +10,8 @@ class PostsController < ApplicationController
 
   # GET /posts/1 or /posts/1.json
   def show
+    @post.views = @post.views + 1
+    @post.save
   end
 
   def hashtags
@@ -37,13 +39,13 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @post = Post.new
-    @post.user_id = current_user.id
-    @post.save
   end
 
   # GET /posts/1/edit
   def edit
+  end
+
+  def profile
   end
 
   # POST /posts or /posts.json
@@ -55,7 +57,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
       if @post.update(post_params)
-          render json: {test: 'asdasd'}
+          render json: @post
       else
           render json: @post.errors, status: :unprocessable_entity
       end
@@ -79,6 +81,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-        params.permit(:image,:privacy,:hashtags)
+        params.permit(:image,:privacy,:hashtags, :user_id)
     end
 end

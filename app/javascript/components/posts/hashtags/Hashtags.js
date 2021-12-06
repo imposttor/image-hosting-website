@@ -4,19 +4,24 @@ class Hashtags extends React.Component {
   render () {
     return (
       <React.Fragment>
-      <div className="links-header">
-          <div>
-              <a href={this.props.postsLink}>My images</a>
-          </div>
-          <div>
-              <a data-method="DELETE" href={this.props.signOutLink}>Sign out</a>
-          </div>
-      </div>
-      <div className="feed-header">
-        SORTED NEWS BY HASHTAG
-      </div>
-      <div className="feed-posts">
-        <Show_posts posts={this.props.postsArray}/>
+      <div className="mainFeed">
+        <div className="linksHeader">
+            <div>
+                <a href="/posts/profile">My profile</a>
+            </div>
+            <div>
+                <a href={this.props.postsLink}>My images</a>
+            </div>
+            <div>
+                <a data-method="DELETE" href={this.props.signOutLink}>Sign out</a>
+            </div>
+        </div>
+        <div className="feedHeader">
+          SORTED NEWS BY HASHTAG
+        </div>
+        <div className="feedPosts">
+          <Show_posts posts={this.props.postsArray}/>
+        </div>
       </div>
       </React.Fragment>
     );
@@ -24,17 +29,17 @@ class Hashtags extends React.Component {
 }
 function Show_posts(props){
     return props.posts.map(item => {
-        return (<div>
-            <div className="post_in_feed">
+        return (<div className="feedPost">
+            <div className="postInfo">
                 Author: {item.user_email}
             </div>
-                <div>
-                Hashtags: <Hashtags_to_links str = {item.hashtags}/>
-                </div>
-        <div className="post_in_feed">
-            <img className="images" src = {item.image}/>
-        </div>
-    </div>);
+            <div className="postInfo">
+            Hashtags: <Hashtags_to_links str = {item.hashtags}/>
+            </div>
+            <div>
+                <img className="images" src = {item.image}/>
+            </div>
+          </div>);
     }
 );
 }

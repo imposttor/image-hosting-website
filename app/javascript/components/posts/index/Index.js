@@ -1,5 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
+import IndexPosts from "../functions/IndexPosts.js"
 class Index extends React.Component {
   render () {
     return (
@@ -19,7 +20,7 @@ class Index extends React.Component {
           MY POSTS
         </div>
         <div>
-          <Index_posts posts={this.props.postsArray}/>
+          <IndexPosts posts={this.props.postsArray}/>
         </div>
         <div className="indexPosts">
             <a href="posts/new">New post</a>
@@ -29,26 +30,7 @@ class Index extends React.Component {
     );
   }
 }
-function Index_posts(props){
-    return props.posts.map((item, index) => {
-        let showLink = "posts/" + item.id;
-        let editLink = "posts/" + item.id + "/edit";
-        let destroyLink ="posts/" + item.id;
-        return (
-            <div key={index} className="indexPosts">
-                    <div>
-                        <a href={showLink} >Show</a>
-                    </div>
-                    <div>
-                        <a href={editLink}>Edit</a>
-                    </div>
-                    <div>
-                        <a data-method = "delete" href={destroyLink}>Destroy</a>
-                    </div>
-            </div>);
-    }
-);
-}
+
 Index.propTypes = {
   postsArray: PropTypes.array,
   feedLink: PropTypes.string,

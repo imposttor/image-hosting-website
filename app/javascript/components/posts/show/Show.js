@@ -1,6 +1,8 @@
-import React from "react"
-import PropTypes from "prop-types"
-import Share from "../../share/Share"
+import React from "react";
+import PropTypes from "prop-types";
+import Share from "../../share/Share";
+import HashtagsToLinks from '../functions/HashtagsToLinks';
+
 class Show extends React.Component {
   render () {
     return (
@@ -36,13 +38,6 @@ class Show extends React.Component {
       </React.Fragment>
     );
   }
-}
-function HashtagsToLinks(props){
-    let host = "/posts/hashtag/";
-    let resSplit = props.str.split('#').slice(1)
-    return resSplit.map((item, index) => {
-        return (<a key={index} href={host + item}>#{item}</a>)
-    })
 }
 
 Show.propTypes = {

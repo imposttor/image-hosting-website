@@ -21,7 +21,9 @@ sendFun(){
     const token = document.querySelector('[name=csrf-token]').content;
     axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
     const formData = new FormData();
-    formData.append('image', img);
+    if(this.state.img != null){
+      formData.append('image', img);
+    }
     formData.append('privacy', prv);
     formData.append('hashtags', tags);
     if(this.props.method == "patch"){
@@ -34,14 +36,19 @@ sendFun(){
       });
     }
     if(this.props.method == "post"){
-      formData.append('user_id', this.props.user_id)
-      axios.post("/posts", formData)
-      .then(response => {
-          window.location.replace("/posts")
-      })
-      .catch(error => {
-       console.log("*****  "+error)
-     });
+      if(this.state.img != null){
+        formData.append('user_id', this.props.user_id)
+        axios.post("/posts", formData)
+        .then(response => {
+            window.location.replace("/posts")
+        })
+        .catch(error => {
+         console.log("*****  "+error)
+       });
+      }
+      else{
+        alert("You have not uploaded the image!")
+      }
     }
 }
 

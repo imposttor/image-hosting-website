@@ -1,5 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
+import ShowPosts from '../functions/ShowPost.js';
+
 class Feed extends React.Component {
   render () {
     return (
@@ -20,7 +22,7 @@ class Feed extends React.Component {
           NEWS FEED
         </div>
         <div className="feedPosts">
-          <Show_posts posts={this.props.postsArray}/>
+          <ShowPosts posts={this.props.postsArray}/>
         </div>
       </div>
       </React.Fragment>
@@ -28,30 +30,6 @@ class Feed extends React.Component {
   }
 }
 
-function Show_posts(props){
-    return props.posts.map((item, index) => {
-        return (<div key={index} className="feedPost">
-            <div className="postInfo">
-                Author: {item.user_email}
-            </div>
-                <div className="postInfo">
-                Hashtags: <HashtagsToLinks str = {item.hashtags}/>
-                </div>
-        <div>
-            <img className="images" src = {item.image}/>
-        </div>
-        <a  className="postInfo" href={"/posts/" + item.id}>Show post</a>
-    </div>);
-    }
-);
-}
-function HashtagsToLinks(props){
-    let host = "/posts/hashtag/";
-    let resSplit = props.str.split('#').slice(1)
-    return resSplit.map((item, index) => {
-        return (<a key={index} href={host + item}>#{item}</a>)
-    })
-}
 Feed.propTypes = {
     postsArray: PropTypes.array,
     postsLink: PropTypes.string,
